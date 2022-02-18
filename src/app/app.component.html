@@ -1,5 +1,43 @@
-<nav class="navbar navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Retro-Reddit</a>
+  <a class="navbar-item pull-sm-right m-r-0" href="#"><i class="nes-icon github is-medium"></i></a>
+  <a class="navbar-item pull-sm-right m-r-0" href="#"><i class="nes-icon linkedin is-medium"></i></a>
+</nav> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <!-- container for responsiveness -->
+  <div class="container-fluid">
+
+    <!-- first item: brand name -->
+    <a class="navbar-brand" href="#">Retro-Reddit</a>
+
+    <!-- this is the button when it collapses due to small screen size (data-bs-target must match the ID of the div below)-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- this div holds everything who is going to collapse inside the button (be careful with the ID. It must match with the button target) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- this list contains the "menu options (items)" such as download, contact, pricing, etc. -->
+      <ul id="my-ul" class="ms-auto navbar-nav">
+
+        <!-- this is an item -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/Ankur2491/reddit-reader" target="_blank"><i class="nes-icon github is-medium"></i></a>
+        </li>
+        <!-- this is another item -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/ankur-sharma-341446b1/" target="_blank"><i class="nes-icon linkedin is-medium"></i></a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
 </nav>
 <br />
 <div class="container-fluid">
@@ -17,19 +55,19 @@
     </div>
     <div class="col-md-1" style="margin-top: 45px;">
       <label>
-        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('new')"/>
+        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('new')" />
         <span>New</span>
       </label>
     </div>
     <div class="col-md-1" style="margin-top: 45px;">
       <label>
-        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('hot')"/>
+        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('hot')" />
         <span>Hot</span>
       </label>
     </div>
     <div class="col-md-2" style="margin-top: 45px;">
       <label>
-        <input type="checkbox" class="nes-checkbox"(click)="justSearch()"/>
+        <input type="checkbox" class="nes-checkbox" (click)="justSearch()" />
         <span>Just-Search</span>
       </label>
     </div>
@@ -69,14 +107,14 @@
     </div>
   </div>
   <div *ngIf="load_main">
-  <div *ngFor="let entry of entries" class="card">
-    <div class="card-body">
-      <p>{{entry.title}}</p>
-      <p><small>Asked at: {{entry.published | date: 'short'}}, by: {{entry.author}}</small></p>
-      <button type="button" class="nes-btn is-primary" (click)="showModal(entry.link)">
-        Top Comments
-      </button>
+    <div *ngFor="let entry of entries" class="card">
+      <div class="card-body">
+        <p>{{entry.title}}</p>
+        <p><small>Asked at: {{entry.published | date: 'short'}}, by: {{entry.author}}</small></p>
+        <button type="button" class="nes-btn is-primary" (click)="showModal(entry.link)">
+          Top Comments
+        </button>
+      </div>
     </div>
-  </div>
   </div>
 </div>
