@@ -38,7 +38,7 @@ export class CommentsComponent implements OnInit {
            if(counter > 0){
              let id:string = entry['id'][0];
              this.commentsMap[id] = entry['link'][0]['$']['href']+".rss"
-             console.log(this.commentsMap);
+            //  console.log(this.commentsMap);
            }
            counter++;
         }

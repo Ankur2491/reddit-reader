@@ -3,7 +3,7 @@
 </div>
 <div class="container-fluid">
   <div class="row" *ngIf="showback && comments.length>0">
-    Comment: <div class="col-md-12" [innerHTML]="commentContext"></div>
+    Comment: <div class="col-md-12" [innerHTML]="commentContext | safehtml"></div>
     <div class="col-md-3">
       <button type="button" class="nes-btn is-warning" (click)="moveBack()">Go Back</button>
     </div>
@@ -11,7 +11,7 @@
   </div>
   <div *ngIf="comments.length>0" style="overflow-y: initial;height: 80vh;overflow-y: auto;">
     <div *ngFor="let cmnt of comments">
-      <div [innerHTML]="cmnt.content"></div>
+      <div [innerHTML]="cmnt.content | safehtml"></div>
       <small>By: {{cmnt.author}}<span>, at: {{cmnt.published | date:'short'}}</span></small>
       <div *ngIf="commentsMap[cmnt.id]">
         <button type="button" class="nes-btn is-success" (click)="loadThread(cmnt.id, cmnt.content)">Read

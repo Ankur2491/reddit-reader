@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommentsComponent } from './comments/comments.component';
 import { FormsModule } from '@angular/forms';
+import { SafehtmlPipe } from './safehtml.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CommentsComponent
+    CommentsComponent,
+    SafehtmlPipe
   ],
   imports: [
     BrowserModule,
