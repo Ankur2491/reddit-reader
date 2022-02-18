@@ -51,7 +51,7 @@ export class AppComponent implements OnInit {
     this.subtitle = "";
     this.lastUpdated = "";
     this.load_main = false;
-    this.http.get(`http://localhost:3000/reddit/${this.searchText}/${this.searchOrder}/${this.justSearchFlag}`, { responseType: 'text' }).subscribe(data => {
+    this.http.get(`https://reddit-reader-server.herokuapp.com/reddit/${this.searchText}/${this.searchOrder}/${this.justSearchFlag}`, { responseType: 'text' }).subscribe(data => {
       let parser = new xml2js.Parser({
         trim: true,
         explicitArray: true

@@ -18,7 +18,7 @@ export class CommentsComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get(`http://localhost:3000/reddit/comments/${this.link[0]}/${this.link[1]}/${this.link[2]}/${this.link[3]}`, { responseType: 'text' }).subscribe(data => {
+    this.http.get(`https://reddit-reader-server.herokuapp.com/reddit/comments/${this.link[0]}/${this.link[1]}/${this.link[2]}/${this.link[3]}`, { responseType: 'text' }).subscribe(data => {
       let parser = new xml2js.Parser({
         trim: true,
         explicitArray: true
@@ -62,7 +62,7 @@ export class CommentsComponent implements OnInit {
     console.log(link);
     let s = link.split("/r/");
     let t = s[1].split("/")
-    this.http.get(`http://localhost:3000/reddit/comments/${t[0]}/${t[1]}/${t[2]}/${t[3]}/${t[4]}`, { responseType: 'text' }).subscribe(data => {
+    this.http.get(`https://reddit-reader-server.herokuapp.com/reddit/comments/${t[0]}/${t[1]}/${t[2]}/${t[3]}/${t[4]}`, { responseType: 'text' }).subscribe(data => {
       let parser = new xml2js.Parser({
         trim: true,
         explicitArray: true
