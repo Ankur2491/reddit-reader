@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   searchText: string = "";
   searchOrder: string = "hot";
   justSearchFlag: boolean = false;
+  statusObj: any;
   loading_20 = false;
   loading_40 = false;
   loading_60 = false;
@@ -34,10 +35,10 @@ export class AppComponent implements OnInit {
     const modalRef = this.modalService.open(CommentsComponent, { windowClass: "myCustomModalClass" });
     modalRef.componentInstance.link = t;
     modalRef.result.then((result) => {
-      console.log(result);
+      // console.log(result);
       console.log('closed');
     }).catch((result) => {
-      console.log(result);
+      // console.log(result);
       console.log('cancelling');
     });
   }
@@ -50,14 +51,21 @@ export class AppComponent implements OnInit {
     this.title = "";
     this.subtitle = "";
     this.lastUpdated = "";
+    this.statusObj = null;
     this.load_main = false;
     this.http.get(`https://reddit-reader-server.herokuapp.com/reddit/${this.searchText}/${this.searchOrder}/${this.justSearchFlag}`, { responseType: 'text' }).subscribe(data => {
       let parser = new xml2js.Parser({
         trim: true,
         explicitArray: true
       });
+      var tempObj = {};
+      if(data.includes('status')){
+      tempObj = JSON.parse(data);
+      this.statusObj = tempObj;
+      }
+      if(!tempObj.hasOwnProperty('status')){
       parser.parseString(data, async (err: any, result: any) => {
-        console.log(result.feed);
+        // console.log(result.feed);
         if (result.feed.logo && result.feed.logo.length > 0)
           this.imgUrl = result.feed.logo[0];
         this.title = result.feed.title[0];
@@ -118,6 +126,7 @@ export class AppComponent implements OnInit {
         this.loading_100 = false;
         this.load_main = true;
       })
+    }
     })
   }
   modifySearch(order: string) {

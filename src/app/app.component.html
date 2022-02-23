@@ -76,6 +76,9 @@
     </div>
   </div>
   <hr />
+  <div *ngIf="statusObj && statusObj.status == 'No results found'" align="center">
+    <p>We couldn't find any results!!</p>
+  </div>
   <div [hidden]="!loading_20">
     <progress class="nes-progress is-success" value="20" max="100"></progress>
   </div>
