@@ -1,0 +1,123 @@
+<!-- <nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Retro-Reddit</a>
+  <a class="navbar-item pull-sm-right m-r-0" href="#"><i class="nes-icon github is-medium"></i></a>
+  <a class="navbar-item pull-sm-right m-r-0" href="#"><i class="nes-icon linkedin is-medium"></i></a>
+</nav> -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <!-- container for responsiveness -->
+  <div class="container-fluid">
+
+    <!-- first item: brand name -->
+    <a class="navbar-brand" href="/">Retro-Reddit</a>
+
+    <!-- this is the button when it collapses due to small screen size (data-bs-target must match the ID of the div below)-->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- this div holds everything who is going to collapse inside the button (be careful with the ID. It must match with the button target) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- this list contains the "menu options (items)" such as download, contact, pricing, etc. -->
+      <ul id="my-ul" class="ms-auto navbar-nav">
+
+        <!-- this is an item -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/Ankur2491/reddit-reader" target="_blank"><i class="nes-icon github is-medium"></i></a>
+        </li>
+        <!-- this is another item -->
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.linkedin.com/in/ankur-sharma-341446b1/" target="_blank"><i class="nes-icon linkedin is-medium"></i></a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </div>
+
+</nav>
+<br />
+<div class="container-fluid">
+  <!-- <span class="nes-text is-primary">Primary</span> -->
+  <div class="row">
+    <div class="col-md-6">
+      <!-- <div style="background-color:#212529; padding: 1rem;" class="nes-field is-inline">
+      <label for="dark_field" style="color:#fff;">.input.is-dark</label>
+      <input type="text" id="dark_field" class="nes-input is-dark" placeholder="dark.css">
+    </div> -->
+      <div class="nes-field">
+        <label for="name_field">Enter a subreddit</label>
+        <input type="text" id="name_field" class="nes-input" placeholder="Eg. AskReddit" [(ngModel)]="searchText">
+      </div>
+    </div>
+    <div class="col-md-1" style="margin-top: 45px;">
+      <label>
+        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('new')" />
+        <span>New</span>
+      </label>
+    </div>
+    <div class="col-md-1" style="margin-top: 45px;">
+      <label>
+        <input type="radio" class="nes-radio" name="answer" checked (click)="modifySearch('hot')" />
+        <span>Hot</span>
+      </label>
+    </div>
+    <div class="col-md-2" style="margin-top: 45px;">
+      <label>
+        <input type="checkbox" class="nes-checkbox" (click)="justSearch()" />
+        <span>Just-Search</span>
+      </label>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="nes-btn is-primary" style="margin-top: 35px;" (click)="fetch()">Search</button>
+    </div>
+  </div>
+  <hr />
+  <div *ngIf="statusObj && statusObj.status == 'No results found'" align="center">
+    <p>We couldn't find any results!!</p>
+  </div>
+  <div [hidden]="!loading_20">
+    <progress class="nes-progress is-success" value="20" max="100"></progress>
+  </div>
+  <div [hidden]="!loading_40">
+    <progress class="nes-progress is-success" value="40" max="100"></progress>
+  </div>
+  <div [hidden]="!loading_60">
+    <progress class="nes-progress is-success" value="60" max="100"></progress>
+  </div>
+  <div [hidden]="!loading_80">
+    <progress class="nes-progress is-success" value="80" max="100"></progress>
+  </div>
+  <div [hidden]="!loading_100">
+    <progress class="nes-progress is-success" value="100" max="100"></progress>
+  </div>
+  <div class="card" *ngIf="load_main">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <img class="card-img-top" [src]="imgUrl">
+        </div>
+        <div class="col-md-9">
+          <div class="card-body" *ngIf="lastUpdated">
+            <p>{{title}} (Updated: {{ lastUpdated | date:'medium'}})</p>
+            <p><small>{{subtitle}}</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="load_main">
+    <div *ngFor="let entry of entries" class="card">
+      <div class="card-body">
+        <p>{{entry.title}}</p>
+        <p><small>Asked at: {{entry.published | date: 'short'}}, by: {{entry.author}}</small></p>
+        <button type="button" class="nes-btn is-primary" (click)="showModal(entry.link)">
+          Top Comments
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
